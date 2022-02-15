@@ -55,11 +55,16 @@ public class Login extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//create new sql connection
+				sqlConnection sc = new sqlConnection();
+				
 				//get values entered
 				username = usernameEnrty.getText();
 				password = passwordEnrty.getText();
 				
-				System.out.println("Username: "+username+"\nPassword: "+password);
+				boolean login = sc.checkLogin(username, password);
+				
+				System.out.println(login);
 				
 			}
 		});
