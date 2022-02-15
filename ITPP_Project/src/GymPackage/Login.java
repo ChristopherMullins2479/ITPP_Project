@@ -1,6 +1,7 @@
 package GymPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,27 +51,6 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		JButton btnNewButton = new JButton("Test");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//create new sql connection
-				sqlConnection sc = new sqlConnection();
-				
-				//get values entered
-				username = usernameEnrty.getText();
-				password = passwordEnrty.getText();
-				
-				boolean login = sc.checkLogin(username, password);
-				
-				System.out.println(login);
-				
-			}
-		});
-		btnNewButton.setBounds(212, 329, 134, 21);
-		contentPane.add(btnNewButton);
-		
 		//username entry box
 		usernameEnrty = new JTextField();
 		usernameEnrty.setBounds(212, 106, 134, 19);
@@ -92,5 +72,46 @@ public class Login extends JFrame {
 		JLabel passwordLabel = new JLabel("Password");
 		passwordLabel.setBounds(134, 176, 68, 13);
 		contentPane.add(passwordLabel);
+		
+		JLabel warning = new JLabel("Username/Password incorrect");
+		warning.setBounds(134, 199, 212, 13);
+		contentPane.add(warning);
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		
+		
+		JButton btnNewButton = new JButton("Test");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//create new sql connection
+				sqlConnection sc = new sqlConnection();
+				
+				//get values entered
+				username = usernameEnrty.getText();
+				password = passwordEnrty.getText();
+				
+				boolean login = sc.checkLogin(username, password);
+				checkIfLogedIn(login);
+				
+			}
+
+			//checks if user has logged in
+			private void checkIfLogedIn(boolean login) {
+
+				if(login == true) {
+					System.out.println("yes");
+				}
+				else {
+					passwordEnrty.setText("");
+					warning.setVisible(true);
+					System.out.println("no");
+				}
+			}
+		});
+		btnNewButton.setBounds(212, 329, 134, 21);
+		contentPane.add(btnNewButton);
+		
+	
 	}
 }
