@@ -6,12 +6,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Login extends JFrame {
 
@@ -58,7 +60,8 @@ public class Login extends JFrame {
 		usernameEnrty.setColumns(10);
 		
 		//password entry box
-		passwordEnrty = new JTextField();
+		passwordEnrty = new JPasswordField();
+		((JPasswordField) passwordEnrty).setEchoChar('*'); 
 		passwordEnrty.setBounds(212, 170, 134, 19);
 		contentPane.add(passwordEnrty);
 		passwordEnrty.setColumns(10);
@@ -99,9 +102,11 @@ public class Login extends JFrame {
 			//checks if user has logged in
 			private void checkIfLogedIn(boolean login) {
 
+				//if user name and password are correct
 				if(login == true) {
-					System.out.println("yes");
+					JOptionPane.showMessageDialog(null, "login suscessful");
 				}
+				//if either is not correct
 				else {
 					passwordEnrty.setText("");
 					warning.setVisible(true);
